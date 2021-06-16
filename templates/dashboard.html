@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Dashboard</h1>
+    <a class = "btn btn-success" href="/add">Adauga carti</a>
+    <hr>
+    <table class = "table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Autor</th>
+            <th>Titlu</th>
+            <th>Gen</th>
+            <th>An</th>
+            <th>Nume editor</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for result in results %}
+    <tr>
+            <td>{{result[0]}}</td>
+            <td>{{result[1]}}</td>
+            <td>{{result[2]}}</td>
+            <td>{{result[3]}}</td>
+            <td>{{result[4]}}</td>
+            <td>{{result[5]}}</td>
+            <td><a href="edit/{{result[0]}}" class ="btn btn-default pullright">Edit</a></td>
+             <td>
+                <form action= "{{url_for('delete', id = result[0])}}" method="post">
+                    <input type = "hidden" name="_method" value ="DELETE">
+                    <input type="submit" value="Delete" class = "btn btn-danger">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
